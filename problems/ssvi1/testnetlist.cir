@@ -1,0 +1,110 @@
+* Miller CMOS OTA with pMOS input stage
+* biasing implemented ideally with a low-frequency low-pass feedback loop
+
+.protect
+.lib '/users/micas/ppalmers/models/UMC_18_CMOS_Model/hspice/MM180_REG18_V123.lib' tt
+*.lib '/users/micas/tchen/tech_file/umc018/jan2005/MM180_TWINWELL_V132.lib' tt
+.unprotect
+
+* circuit
+M0 Iout n_auto_107 Vdd Vdd P_18_MM M=10 L=1e-06 W=35u
+V1 n_auto_107 0  DC 1.0
+
+M8 Iout Vin gnd gnd N_18_MM M=11 L=1e-06 W=4u
+
+
+Rxx nout Iout R=0
+Rxx2 ninp Vin R=0
+Rxx3 ndd Vdd R=0
+
+.param pCload = 5e-12
+.param pVdd   = 1.8
+.param pVdcin = 0.8
+.param pVout =  0.6
+.param pRfb = 1.000e+09
+.param pCfb = 1.000e-03
+
+Cload	nout	gnd	pCload
+
+
+* biasing circuitry
+
+Vdd		ndd		gnd	DC=pVdd
+Vgnd gnd 0 0
+Vindc		ninpdc		gnd	DC=pVdcin
+Vinac		ninpdc		ninp1	AC=1
+Vintran 	ninp1 		ninpx 	DC=0 PWL(
++ 0     0
++ 0.1n   -0.2
++ 10.0n  -0.2 
++ 10.1n  0.2 
++ 30.0n  0.2
++ 30.1n  -.2 )
+
+* feedback loop for dc biasing 
+Vout_ref	nvout_ref	gnd	pVout
+Efb1	nfbin	gnd	nout	nvout_ref	1.0e2
+Rfb	nfbin	nfbout	pRfb
+Cfb	nfbout	gnd	pCfb
+Efb2	n1	gnd	nfbout	gnd	1.0
+Efb3	ninp	n1	ninpx	gnd	1.0
+
+* simulator options
+
+*.option post list
+.option post=2
+.option ingold=2
+.option lvltim=2
+.option method=gear
+.option absmos=1e-7 relmos=1e-4
+.option reli=1e-4 absi=1e-7
+.option relv=1e-4 absv=1e-7
+.option relq=0.005
+.option acout=0       * belang voor ac simul; vdb e.d zie ac simul
+.option nopage        * geen pagebreaks
+.option itl1=5000 itl2=5000
+.option probe
+.option interp
+.option dcon=1
+
+.option captab
+
+* simulation statements
+
+.op
+*.DC TEMP 25 25 10
+.ac	dec	50	0.0e0	10.0e9
+
+*.tran 100p 50n
+.probe tran V(nout)
+.probe tran V(ninp)
+.probe tran V(*)
+
+* Frequency-domain measurements
+.measure ac ampl       max vdb(nout) at=0
+.measure ac inampl max vdb(ninp) at=0
+.measure ac gain PARAM='ampl-inampl'
+.measure ac phase FIND vp(nout) WHEN vdb(nout)=0 CROSS=1
+.measure ac phasemargin PARAM='phase+180'
+.measure ac GBW WHEN vdb(nout)=0 CROSS=1
+
+.measure ac pole1 WHEN vp(nout)=-45 CROSS=1
+.measure ac pole2 WHEN vp(nout)=-135 CROSS=1
+
+* power measurement
+EPWR1 pwrnode gnd volts='-pVdd*I(Vdd)'
+
+* Time-domain measurements
+.param pRiseDelta=1
+.measure tran time1 when V(nout)='pVout+0.5*pRiseDelta' CROSS=1
+.measure tran time2 when V(nout)='pVout-0.5*pRiseDelta' CROSS=2
+.measure tran time3 when V(nout)='pVout+0.5*pRiseDelta' CROSS=2
+.measure tran time4 when V(nout)='pVout-0.5*pRiseDelta' CROSS=3
+.measure tran 'srneg' param='pRiseDelta/(time4-time3)'
+.measure tran 'srpos' param='pRiseDelta/(time1-time2)'
+
+.measure tran outmax MAX v(nout)
+.measure tran outmin MIN v(nout)
+
+.end
+
