@@ -18,11 +18,12 @@ MORE INFO: http://trent.st/publications/
 
 Authors
 =======
-  Trent McConaghy, Solido Design Automation Inc. gtrent@gmail.com
-  
-  Pieter Palmers
 
-  The original MOJITO code was written during the Trent's and Pieter's PhD studies at ESAT-MICAS, KU Leuven, Belgium, between 2005 and 2008.
+MOJITO was written by:
+ * Trent McConaghy, Solido Design Automation Inc. gtrent@gmail.com
+ * Pieter Palmers
+
+The original MOJITO code was written during the Trent's and Pieter's PhD studies at ESAT-MICAS, KU Leuven, Belgium, between 2005 and 2008.
 
 Using the code
 ==============
