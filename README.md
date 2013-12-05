@@ -1,4 +1,4 @@
-mojito
+MOJITO
 ======
 
 MOJITO is a tool for analog circuit topology selection / topology design (synthesis). 
@@ -28,13 +28,13 @@ The original MOJITO code was written during the Trent's and Pieter's PhD studies
 Using the code
 ==============
 
-To get started: ./help.py
-You know your version is working if all the unit tests pass: ./runtests.py
+ * To get started: ./help.py
+ * You know your version is working if all the unit tests pass: ./runtests.py
 
 Release notes
 =============
 
-The original code was only integrated (well, hacked) into hspice, for a specific process. It has not been tested recently. It will likely take a bit of hacking to work with your simulator and model files anyway. 
+The original code was only integrated (well, hacked) into hspice, for a specific process. It has not been tested recently. It will likely take a bit of hacking to work with your simulator and model files anyway. (Priority: integrate into ngspice.)
 
 Extensions
 ==========
