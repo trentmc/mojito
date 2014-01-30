@@ -1,11 +1,12 @@
 MOJITO
 ======
 
-MOJITO is a tool for analog circuit topology selection / topology design (synthesis). 
+MOJITO is a tool for analog circuit topology selection / topology design (synthesis).
 
-Topology selection tools must consider a broad variety of topologies such that an appropriate topology is selected, must easily adapt to new semiconductor process nodes, and readily incorporate new topologies. Topology design tools must allow for designers to creatively explore new topology ideas as rapidly as possible. Such tools should not impose new, untrusted topologies that have no logical basis. 
-
-MOJITO supports both topology selection and design.  It takes in a pre-specified library of about 30 hierarchically-organized analog building blocks. This library defines thousands of possible different circuit opamp topologies from different combinations of the building blocks. The library is independent of process, and does not require input of behavioral models. Therefore, it only has to be specified once. However, designers can readily add new building block ideas to it. MOJITO efficiently globally searches this library's possible topologies and sizings by leveraging the hierarchical nature of the blocks. MOJITO returns ("synthesizes") topologies that are trustworthy by construction. MOJITO is multi-objective, i.e. it returns a set of sized topologies that collectively approximate an optimal performance tradeoff curve. Once a single MOJITO run is done at a process node, the results are stored as a database for future queries by other designers. Therefore MOJITO supports a "specs-in sized-topology-out" workflow with immediate turnaround.
+-Inputs: a hierarchical library of analog building blocks (pre-specified), having >100K possible topologies
+-Action: Searches ("synthesizes") possible topologies and sizings, with SPICE in the loop. Multi-objective, device operating constraints. Operating-point driven approach to sizing.
+-Returns: a set of sized topologies that approximate a performance tradeoff curve. 
+Once just one MOJITO run is done at a process node, the results are stored as a db for future queries by other designers. Therefore MOJITO supports a "specs-in sized-topology-out" workflow with immediate turnaround.
 
 Main MOJITO references
 ======================
