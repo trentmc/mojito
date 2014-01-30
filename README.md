@@ -3,9 +3,10 @@ MOJITO
 
 MOJITO is a tool for analog circuit topology selection / topology design (synthesis).
 
--Inputs: a hierarchical library of analog building blocks (pre-specified), having >100K possible topologies
--Action: Searches ("synthesizes") possible topologies and sizings, with SPICE in the loop. Multi-objective, device operating constraints. Operating-point driven approach to sizing.
--Returns: a set of sized topologies that approximate a performance tradeoff curve. 
+ * Inputs: a hierarchical library of analog building blocks (pre-specified), having >100K possible topologies
+ * Action: Searches ("synthesizes") possible topologies and sizings, with SPICE in the loop. Multi-objective, device operating constraints. Operating-point driven approach to sizing.
+ * Returns: a set of sized topologies that approximate a performance tradeoff curve. 
+
 Once just one MOJITO run is done at a process node, the results are stored as a db for future queries by other designers. Therefore MOJITO supports a "specs-in sized-topology-out" workflow with immediate turnaround.
 
 Main MOJITO references
