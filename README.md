@@ -9,6 +9,8 @@ MOJITO is a tool for analog circuit topology selection / topology design (synthe
 
 Once just one MOJITO run is done at a process node, the results are stored as a db for future queries by other designers. Therefore MOJITO supports a "specs-in sized-topology-out" workflow with immediate turnaround.
 
+There are two main versions of MOJITO. This is the basic, simplest, and most stable version. The other version is faster ("TAPAS" extension), variation-aware ("R" extension), and has a bigger topology library; it's at: https://github.com/trentmc/mojito_r_tapas
+
 Main MOJITO references
 ======================
 
@@ -46,4 +48,4 @@ MOJITO had several extensions, listed below. If you would like code related to o
  * ISCLES -- stacking many tiny circuits to learn new input-output mappings (e.g. V-V or flash ADCs). Reference: P. Gao, T. McConaghy, and G.G.E. Gielen, ISCLEs: Importance sampled circuit learning ensembles for robust analog IC design, in Proc. Intern. Conference on Computer-Aided Design (ICCAD), San Jose, November 2008. [PDF]
  *  TAPAS -- speed up basic MOJITO using a MOEA/D variant. Reference: P. Palmers, T. McConaghy, M. Steyaert, and G.G.E. Gielen, Massively multi-topology sizing of analog integrated circuits, in Proc. Design Automation and Test in Europe (DATE), March 2009. http://trent.st/content/2009_DATE_mojito_tapas.pdf
 
- MOJITO code that includes "R" and "TAPAS" extensions, as well as a larger building blocks library, is at: https://github.com/trentmc/mojito_r_tapas
+
